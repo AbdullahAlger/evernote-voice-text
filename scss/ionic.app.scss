@@ -15,13 +15,24 @@ $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
 
-
-$stable: #2DBE60;
+@font-face {
+	font-family: "OpenSans";
+  src: url("../lib/ionic/fonts/OpenSans-Regular.ttf");
+  src: url("../lib/ionic/fonts/OpenSans.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; 
+}
 
 h1 {
-	color: #000;
 	text-align: center;
 }
+
+$font-family-sans-serif: "OpenSans";
+$stable: #2DBE60;
+$bar-stable-text: #fff;
+$button-stable-text: #fff;
+$button-large-height: 90px;
+
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css

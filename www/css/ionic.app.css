@@ -14,6 +14,16 @@ $assertive:                       #ef4e3a !default;
 $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
+@font-face {
+  font-family: "OpenSans";
+  src: url("../lib/ionic/fonts/OpenSans-Regular.ttf");
+  src: url("../lib/ionic/fonts/OpenSans.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+h1 {
+  text-align: center; }
+
 /*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -2210,7 +2220,7 @@ body, .ionic-body {
   color: #000;
   word-wrap: break-word;
   font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "OpenSans";
   line-height: 20px;
   text-rendering: optimizeLegibility;
   -webkit-backface-visibility: hidden;
@@ -2536,7 +2546,7 @@ cite {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   color: #000;
   font-weight: 500;
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-family: "OpenSans";
   line-height: 1.2; }
   h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small {
     font-weight: normal;
@@ -2788,9 +2798,9 @@ a.subdued {
     border-color: #b2b2b2;
     background-color: #2dbe60;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
-    color: #444; }
+    color: #fff; }
     .bar.bar-stable .title {
-      color: #444; }
+      color: #fff; }
     .bar.bar-stable.bar-footer {
       background-image: linear-gradient(180deg, #b2b2b2, #b2b2b2 50%, transparent 50%); }
   .bar.bar-positive {
@@ -2952,9 +2962,9 @@ a.subdued {
 .bar-stable .button {
   border-color: #b2b2b2;
   background-color: #2dbe60;
-  color: #444; }
+  color: #fff; }
   .bar-stable .button:hover {
-    color: #444;
+    color: #fff;
     text-decoration: none; }
   .bar-stable .button.active, .bar-stable .button.activated {
     border-color: #a2a2a2;
@@ -2964,7 +2974,7 @@ a.subdued {
     border-color: transparent;
     background: none;
     box-shadow: none;
-    color: #444;
+    color: #fff;
     font-size: 17px; }
   .bar-stable .button.button-icon {
     border-color: transparent;
@@ -3172,7 +3182,7 @@ a.subdued {
   border-color: #b2b2b2;
   background-color: #2DBE60;
   background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
-  color: #444;
+  color: #fff;
   position: absolute;
   bottom: 0;
   z-index: 5;
@@ -3183,7 +3193,7 @@ a.subdued {
   background-size: 0;
   line-height: 49px; }
   .tabs .tab-item .badge {
-    background-color: #444;
+    background-color: #fff;
     color: #2DBE60; }
   @media (min--moz-device-pixel-ratio: 1.5), (-webkit-min-device-pixel-ratio: 1.5), (min-device-pixel-ratio: 1.5), (min-resolution: 144dpi), (min-resolution: 1.5dppx) {
     .tabs {
@@ -3208,9 +3218,9 @@ a.subdued {
   border-color: #b2b2b2;
   background-color: #2DBE60;
   background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
-  color: #444; }
+  color: #fff; }
   .tabs-stable > .tabs .tab-item .badge, .tabs.tabs-stable .tab-item .badge {
-    background-color: #444;
+    background-color: #fff;
     color: #2DBE60; }
 
 .tabs-positive > .tabs, .tabs.tabs-positive {
@@ -4196,7 +4206,7 @@ a.subdued {
   .item.item-stable {
     border-color: #b2b2b2;
     background-color: #2DBE60;
-    color: #444; }
+    color: #fff; }
   .item.item-positive {
     border-color: #145fd7;
     background-color: #4a87ee;
@@ -4312,7 +4322,7 @@ a.item-content {
 .item-complex.item-stable > .item-content {
   border-color: #b2b2b2;
   background-color: #2DBE60;
-  color: #444; }
+  color: #fff; }
   .item-complex.item-stable > .item-content.active, .item-complex.item-stable > .item-content:active {
     border-color: #a2a2a2;
     background-color: #e5e5e5; }
@@ -4845,7 +4855,7 @@ a.item-content {
   color: #444; }
 .tabs .tab-item .badge.badge-stable, .badge.badge-stable {
   background-color: #2DBE60;
-  color: #444; }
+  color: #fff; }
 .tabs .tab-item .badge.badge-positive, .badge.badge-positive {
   background-color: #4a87ee;
   color: #fff; }
@@ -4942,7 +4952,7 @@ label, input, button, select, textarea {
   line-height: 1.42857; }
 
 input, button, select, textarea {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+  font-family: "OpenSans"; }
 
 .item-input {
   display: -webkit-box;
@@ -5653,7 +5663,7 @@ input[type="range"] {
     color: #444; }
   .item-select.item-stable select {
     background: #2DBE60;
-    color: #444; }
+    color: #fff; }
   .item-select.item-stable:after, .item-select.item-stable .input-label {
     color: #656565; }
   .item-select.item-positive select {
@@ -5711,7 +5721,7 @@ progress {
 .button {
   border-color: #b2b2b2;
   background-color: #2DBE60;
-  color: #444;
+  color: #fff;
   position: relative;
   display: inline-block;
   margin: 0;
@@ -5728,7 +5738,7 @@ progress {
   line-height: 42px;
   cursor: pointer; }
   .button:hover {
-    color: #444;
+    color: #fff;
     text-decoration: none; }
   .button.active, .button.activated {
     border-color: #a2a2a2;
@@ -5792,9 +5802,9 @@ progress {
   .button.button-stable {
     border-color: #b2b2b2;
     background-color: #2DBE60;
-    color: #444; }
+    color: #fff; }
     .button.button-stable:hover {
-      color: #444;
+      color: #fff;
       text-decoration: none; }
     .button.button-stable.active, .button.button-stable.activated {
       border-color: #a2a2a2;
@@ -6020,13 +6030,13 @@ progress {
 .button-large {
   padding: 0 16px;
   min-width: 68px;
-  min-height: 59px;
+  min-height: 95px;
   font-size: 20px;
-  line-height: 53px; }
+  line-height: 89px; }
   .button-large .icon:before, .button-large.icon:before, .button-large.icon-left:before, .button-large.icon-right:before {
     padding-bottom: 2px;
     font-size: 32px;
-    line-height: 51px; }
+    line-height: 87px; }
 
 .button-icon {
   -webkit-transition: opacity 0.1s;
@@ -7708,9 +7718,9 @@ $ios-transition-box-shadow-end: -200px 0px 200px rgba(0,0,0,0.15), -5px 0px 5px 
  * Apply roboto font
  */
 .roboto {
-  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+  font-family: "Roboto", "OpenSans"; }
   .roboto input {
-    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; }
+    font-family: "Roboto", "OpenSans"; }
 
 /*
 .platform-android {

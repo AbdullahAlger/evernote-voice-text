@@ -5,6 +5,29 @@
 // the 2nd parameter is an array of 'requires'
 var evervoice = angular.module('everVoice', ['ionic'])
 
+.controller('recordVoice', function($scope){
+
+// Indicates Record and Stop are not in use 
+  
+  $scope.recordActive = false;
+  $scope.stopActive = true;
+
+// Record Function
+  $scope.record = function() {
+      $scope.recordActive = !$scope.stopActive;
+      console.log('record');
+  };
+
+// Stop Function
+  $scope.stop = function() {
+      $scope.stopActive = !$scope.recordActive;
+      console.log('stop');
+  }; 
+
+})
+
+
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
