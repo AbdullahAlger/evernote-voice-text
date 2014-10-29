@@ -16,9 +16,12 @@ $dark:                            #444 !default;
 */
 
 
-$bar-stable: #2DBE60;
+$stable: #2DBE60;
 
-
+h1 {
+	color: #000;
+	text-align: center;
+}
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css
