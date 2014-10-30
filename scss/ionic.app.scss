@@ -14,23 +14,24 @@ $assertive:                       #ef4e3a !default;
 $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
-
 @font-face {
-	font-family: "Caelilia";
-  src: url("../lib/ionic/fonts/CaeciliaLTStd-Roman.otf");
-  src: url("../lib/ionic/fonts/CaeciliaLTStd-Roman.otf") format("opentype");
+  font-family: "OpenSans";
+  src: url("../lib/ionic/fonts/OpenSans-Regular.ttf");
+  src: url("../lib/ionic/fonts/OpenSans-Regular.ttf") f format("truetype");
   font-weight: normal;
-  font-style: normal; 
-}
+  font-style: normal; }
 
 h1 {
 	text-align: center;
 }
 
-
 .content {
 	vertical-align: top;
-	margin-top: 50px;
+	margin-top: 20px;
+}
+
+.record-time {
+	font-weight: bold;
 }
 
 $font-family-sans-serif: "OpenSans";
@@ -38,6 +39,7 @@ $stable: #2DBE60;
 $bar-stable-text: #fff;
 $button-stable-text: #fff;
 $button-large-height: 90px;
+$button-large-font-size: 20px;
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css

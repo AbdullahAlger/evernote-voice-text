@@ -5,12 +5,34 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('everVoice', ['ionic'])
 
-.controller('RecordVoice', ['$scope', 'VoiceService', function($scope, VoiceService){
-  $scope.recordActive = true;
+.controller('RecordVoice', ['$scope', '$ionicPopup', 'VoiceService', function($scope, $ionicPopup, VoiceService){
+
+// Evernote Popup - Was Formerly another Controller
+$scope.showConfirm = function() {
+   var confirmPopup = $ionicPopup.confirm({
+     title: 'Save Recording',
+     template: 'Do you want to save your voice message?' });
+   confirmPopup.then(function(res) {
+     if(res) {
+       console.log('You are sure');
+     } else {
+       console.log('You are not sure');
+     }
+   });
+ };
+
+// Show Time Recording
+  VoiceService.onTimeUpdate(function(event, time) {
+    $scope.$apply(function() {
+      $scope.recordTime = time;
+    });
+  });
+
 }])
 
 
-.service('VoiceService', ['$scope', '$log', function($scope, $log){
+
+.service('VoiceService', ['$scope', function($scope){
 
 // Record Function
   $scope.record = function() {
@@ -18,11 +40,11 @@ angular.module('everVoice', ['ionic'])
     var mediaRec = new Media(src,
     // Success message  
       function() {
-        $log("record success");
+        console.log("record success");
       }, 
     // Error message
       function(err) {
-        $log("record error " + err.code);
+        console.log("record error " + err.code);
       });
     // Starts recording
     mediaRec.startRecord();
@@ -32,18 +54,41 @@ angular.module('everVoice', ['ionic'])
       }, 60000);
     };
 
-
 // Stop Function
   $scope.stop = function() {
     mediaRec.stopRecord();
   }; 
-
 
 // Record Duration 
   
   
 
 }])
+
+.filter('timecode', function(){
+   return function(seconds) {
+     seconds = Number.parseFloat(seconds);
+ 
+     // Returned when No Time is Provided
+     if (Number.isNaN(seconds)) {
+       return '-:--';
+     }
+ 
+     // Returns a Whole Number
+     var wholeSeconds = Math.floor(seconds);
+     var minutes = Math.floor(wholeSeconds / 60);
+     remainingSeconds = wholeSeconds % 60;
+ 
+     var output = minutes + ':';
+     // zero pad seconds, so 9 seconds should be :09
+     if (remainingSeconds < 10) {
+       output += '0';
+     }
+     output += remainingSeconds;
+     return output;
+   }
+ })
+
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

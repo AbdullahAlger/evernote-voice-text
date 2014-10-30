@@ -15,9 +15,9 @@ $royal:                           #8a6de9 !default;
 $dark:                            #444 !default;
 */
 @font-face {
-  font-family: "Caelilia";
-  src: url("../lib/ionic/fonts/CaeciliaLTStd-Roman.otf");
-  src: url("../lib/ionic/fonts/CaeciliaLTStd-Roman.otf") format("opentype");
+  font-family: "OpenSans";
+  src: url("../lib/ionic/fonts/OpenSans-Regular.ttf");
+  src: url("../lib/ionic/fonts/OpenSans-Regular.ttf") f format("truetype");
   font-weight: normal;
   font-style: normal; }
 
@@ -26,7 +26,10 @@ h1 {
 
 .content {
   vertical-align: top;
-  margin-top: 50px; }
+  margin-top: 20px; }
+
+.record-time {
+  font-weight: bold; }
 
 /*!
   Ionicons, v1.5.2
