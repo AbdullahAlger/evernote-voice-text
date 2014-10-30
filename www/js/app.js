@@ -3,10 +3,17 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-var evervoice = angular.module('everVoice', ['ionic'])
+angular.module('everVoice', ['ionic'])
 
-.controller('recordVoice', function($scope){
+.controller('RecordVoice', function($scope){
 
+
+
+})
+
+
+.service('VoiceService', ['$scope', function(){
+  
 // Indicates Record and Stop are not in use 
   
   $scope.recordActive = false;
@@ -24,7 +31,7 @@ var evervoice = angular.module('everVoice', ['ionic'])
       console.log('stop');
   }; 
 
-})
+}])
 
 
 
