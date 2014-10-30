@@ -24,6 +24,10 @@ $dark:                            #444 !default;
 h1 {
   text-align: center; }
 
+.content {
+  vertical-align: top;
+  margin-top: 50px; }
+
 /*!
   Ionicons, v1.5.2
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/

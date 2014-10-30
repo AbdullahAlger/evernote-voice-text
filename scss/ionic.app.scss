@@ -27,12 +27,16 @@ h1 {
 	text-align: center;
 }
 
+.content {
+	vertical-align: top;
+	margin-top: 50px;
+}
+
 $font-family-sans-serif: "OpenSans";
 $stable: #2DBE60;
 $bar-stable-text: #fff;
 $button-stable-text: #fff;
 $button-large-height: 90px;
-
 
 
 // The path for our ionicons font files, relative to the built CSS in www/css

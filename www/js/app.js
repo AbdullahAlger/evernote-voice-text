@@ -6,34 +6,23 @@
 angular.module('everVoice', ['ionic'])
 
 .controller('RecordVoice', function($scope){
-
-
-
+  $scope.recordActive = true;
 })
 
 
-.service('VoiceService', ['$scope', function(){
-  
-// Indicates Record and Stop are not in use 
-  
-  $scope.recordActive = false;
-  $scope.stopActive = true;
+.service('VoiceService', function($scope, $log){
 
 // Record Function
   $scope.record = function() {
-      $scope.recordActive = !$scope.stopActive;
-      console.log('record');
+    $log.log('record');
   };
 
 // Stop Function
   $scope.stop = function() {
-      $scope.stopActive = !$scope.recordActive;
-      console.log('stop');
+    $log.log('stop');
   }; 
 
-}])
-
-
+})
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
