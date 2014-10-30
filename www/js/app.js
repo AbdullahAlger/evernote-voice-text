@@ -5,24 +5,45 @@
 // the 2nd parameter is an array of 'requires'
 angular.module('everVoice', ['ionic'])
 
-.controller('RecordVoice', function($scope){
+.controller('RecordVoice', ['$scope', 'VoiceService', function($scope, VoiceService){
   $scope.recordActive = true;
-})
+}])
 
 
-.service('VoiceService', function($scope, $log){
+.service('VoiceService', ['$scope', '$log', function($scope, $log){
 
 // Record Function
   $scope.record = function() {
-    $log.log('record');
-  };
+    var src = "??";
+    var mediaRec = new Media(src,
+    // Success message  
+      function() {
+        $log("record success");
+      }, 
+    // Error message
+      function(err) {
+        $log("record error " + err.code);
+      });
+    // Starts recording
+    mediaRec.startRecord();
+    // Sets a timeout for the recording if not stopped
+    setTimeout(function() {
+      mediaRec.stopRecord();
+      }, 60000);
+    };
+
 
 // Stop Function
   $scope.stop = function() {
-    $log.log('stop');
+    mediaRec.stopRecord();
   }; 
 
-})
+
+// Record Duration 
+  
+  
+
+}])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
