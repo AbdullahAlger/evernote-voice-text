@@ -3,13 +3,52 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('everVoice', ['ionic', 'ngCordova'])
+var evernote = angular.module('everVoice', ['ionic', 'ngCordova', 'ngCordovaMocks'])
 
-.controller('RecordVoice', ['$scope', '$ionicPopup', 'VoiceService', function($scope, $ionicPopup, $cordovaMedia, VoiceService){
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if(window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if(window.StatusBar) {
+      StatusBar.styleDefault();
+    }
+  });
+});
+
+evernote.controller('RecordVoice', function($scope, $cordovaCapture){
+  
+  $scope.captureAudio = function() {
+    var options = { duration: 10 };
+
+    $cordovaCapture.captureAudio(options).then(function(audioData) {
+      // Success! Audio data is here
+      console.log('clicked record');
+    }, function(err) {
+      // An error occured. Show a message to the user
+    });
+  }
+
+   $scope.captureVideo = function() {
+    var options = { limit: 3, duration: 15 };
+
+    $cordovaCapture.captureVideo(options).then(function(videoData) {
+      // Success! Video data is here
+       $scope.debug = videoData;
+    }, function(err) {
+      // An error occured. Show a message to the user
+    });
+  }
 
 
-// Evernote Popup - Was Formerly another Controller
-$scope.showConfirm = function() {
+});
+
+// Evernote Popup Controller
+
+evernote.controller('PopupCtrl', function($scope, $ionicPopup){
+  $scope.showConfirm = function() {
    var confirmPopup = $ionicPopup.confirm({
      title: 'Save Recording',
      template: 'Save to Evernote?' });
@@ -21,32 +60,11 @@ $scope.showConfirm = function() {
      }
    });
  };
-
-// Show Time Recording
-  VoiceService.onTimeUpdate(function(event, time) {
-    $scope.$apply(function() {
-      $scope.recordTime = time;
-    });
-  });
-
-}])
-
+});
 // File Cordova to send to att ???
 
-.factory('VoiceService',['$rootScope', function($rootScope){
 
-  var currentRecording = null;
-
-  return {
-  onTimeUpdate: function(callback) {
-      return $rootScope.$on('recording:timeupdate', callback);
-    }
-  };
-
-
-}])
-
-.filter('timecode', function(){
+evernote.filter('timecode', function(){
    return function(seconds) {
      seconds = Number.parseFloat(seconds);
  
@@ -68,18 +86,7 @@ $scope.showConfirm = function() {
      output += remainingSeconds;
      return output;
    }
- })
+ });
 
 
-.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
-})
+

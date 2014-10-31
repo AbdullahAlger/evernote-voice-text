@@ -10,12 +10,11 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-    <script src="http://code.ionicframework.com/1.0.0-beta.13/js/angular/angular-sanitize.js"</script>
-    <script src="lib/lodash/dist/lodash.js"</script>
-    <script src="lib/restangular/dist/restangular.js"</script>
+    <script src="lib/lodash/dist/lodash.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova-mocks.js"></script>
+    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
 
     <!-- cordova script (this will be a 404 during development) -->
-    <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
@@ -29,17 +28,13 @@
       </ion-header-bar>
       
   <ion-content>
-    <div class="content" ng-controller="RecordVoice">
-     <div> 
-      <button class="button button-block button-assertive button-large record-controls" ng-click="voiceService.record()" ng-show="!recordActive">Record</button>
-      <button class="button button-block button-energized button-large record-controls" ng-click="voiceService.stop()" ng-show="recordActive">Stop</button>
+    <div class="content">
+     <div ng-controller="RecordVoice"> 
+      <button class="button button-block button-assertive button-large record-controls" ng-click="captureVideo()">Record</button>
     </div>
-    <div>
+    <div ng-controller="PopupCtrl">
       <button class="button button-block button-stable" ng-click="showConfirm()">Save to Evernote</button>
       <script id="popup-template.html" type="text/ng-template"></script>
-    </div>
-    <div class="padding text-center"> 
-      <div class='record-time'>Record Time: {{ recordTime | timecode }}</div>
     </div>
     <div class="row-center"> 
       <p class="text-center">The objective of this App is to record your voice using the iOS microphone, send the recording to the AT&T Speech to Text API, return the results, and save the text as a note in Evernote.</p>
