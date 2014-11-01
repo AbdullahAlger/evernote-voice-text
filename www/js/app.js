@@ -18,31 +18,26 @@ var evernote = angular.module('everVoice', ['ionic', 'ngCordova', 'ngCordovaMock
   });
 });
 
-evernote.controller('RecordVoice', function($scope, $cordovaCapture){
-  
-  $scope.captureAudio = function() {
-    var options = { duration: 10 };
-
-    $cordovaCapture.captureAudio(options).then(function(audioData) {
-      // Success! Audio data is here
-      console.log('clicked record');
-    }, function(err) {
-      // An error occured. Show a message to the user
-    });
-  }
-
-   $scope.captureVideo = function() {
-    var options = { limit: 3, duration: 15 };
-
-    $cordovaCapture.captureVideo(options).then(function(videoData) {
-      // Success! Video data is here
-       $scope.debug = videoData;
-    }, function(err) {
-      // An error occured. Show a message to the user
-    });
-  }
-
-
+evernote.controller('Capture', function($scope, $cordovaCamera){
+     $scope.takePicture = function() {
+        var options = { 
+            quality : 40, 
+            destinationType : Camera.DestinationType.FILE_URL, 
+            sourceType : Camera.PictureSourceType.CAMERA, 
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
+ 
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+            $scope.imgURI = "data:image/jpeg;base64," + imageData;
+        }, function(err) {
+            // An error occured. Show a message to the user
+        });
+    }
 });
 
 // Evernote Popup Controller
@@ -76,7 +71,7 @@ evernote.filter('timecode', function(){
      // Returns a Whole Number
      var wholeSeconds = Math.floor(seconds);
      var minutes = Math.floor(wholeSeconds / 60);
-     remainingSeconds = wholeSeconds % 60;
+     var remainingSeconds = wholeSeconds % 60;
  
      var output = minutes + ':';
      // zero pad seconds, so 9 seconds should be :09
