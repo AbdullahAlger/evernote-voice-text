@@ -26,22 +26,22 @@
       <ion-header-bar class="bar-stable">
         <h1 class="title ">EverVoice</h1>
       </ion-header-bar>
-      
+
   <ion-content>
     <div class="content">
-     <div ng-controller="Capture">
-      <button class="button button-block button-assertive button-large record-controls" ng-click="takePicture()">Record</button>
+     <div ng-controller="RecordCtrl">
+      <button class="button button-block button-assertive button-large record-controls" ng-click="captureAudio()">Record</button>
     </div>
     <div ng-controller="PopupCtrl">
       <button class="button button-block button-stable" ng-click="showConfirm()">Save to Evernote</button>
       <script id="popup-template.html" type="text/ng-template"></script>
     </div>
-    <div class="row-center"> 
+    <div class="row-center">
       <p class="text-center">The objective of this App is to record your voice using the iOS microphone, send the recording to the AT&T Speech to Text API, return the results, and save the text as a note in Evernote.</p>
     </div>
   </div>
   </ion-content>
-      
+
       <ion-footer-bar class="bar-stable">
       </ion-footer-bar>
     </ion-pane>
