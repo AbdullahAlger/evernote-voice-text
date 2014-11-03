@@ -59,45 +59,99 @@ evernote.directive('sendATT', function($scope) {
 
 });
 
-evernote.directive('createEvernote', function($scope) {
+evernote.service('createEvernote', function($rootScope) {
 // Evernote creates a new note
 
-  var Evernote = require('evernote').Evernote;
+  return {
 
-  module.exports = function(
-    token,
-    noteTitle,
-    noteBody,
-    isReminder,
-    callback
-  ) {
+    consumerKey: 'abdullahalger',
+    consumerSecret: '6a2c6323f12f818c',
+    evernoteHostName: 'https://sandbox.evernote.com',
+    showConfirm: function() {
+      options = {
+        consumerKey: evernote.consumerKey,
+        consumerSecret: evernote.consumerSecret,
+        callbackUrl : "gotOAuth.html", // this filename doesn't matter in this example
+        signatureMethod : "HMAC-SHA1",
+      };
+      oauth = OAuth(options);
+      // OAuth Step 1: Get request token
+      oauth.request({'method': 'GET', 'url': app.evernoteHostName + '/oauth', 'success': app.success, 'failure': app.failure});
+    },
+      success: function(data) {
+        var isCallBackConfirmed = false;
+        var token = '';
+        var vars = data.text.split("&");
+        for (var i = 0; i < vars.length; i++) {
+          var y = vars[i].split('=');
+          if(y[0] === 'oauth_token')  {
+            token = y[1];
+          }
+          else if(y[0] === 'oauth_token_secret') {
+            this.oauth_token_secret = y[1];
+            localStorage.setItem("oauth_token_secret", y[1]);
+          }
+          else if(y[0] === 'oauth_callback_confirmed') {
+            isCallBackConfirmed = true;
+          }
+        }
+        var ref;
+        if(isCallBackConfirmed) {
+          // step 2
+          ref = window.open(app.evernoteHostName + '/OAuth.action?oauth_token=' + token, '_blank');
+          ref.addEventListener('loadstart',
+            function(event) {
+              var loc = event.url;
+              if (loc.indexOf(app.evernoteHostName + '/Home.action?gotOAuth.html?') >= 0) {
+                var index, verifier = '';
+                var got_oauth = '';
+                var params = loc.substr(loc.indexOf('?') + 1);
+                params = params.split('&');
+                for (var i = 0; i < params.length; i++) {
+                  var y = params[i].split('=');
+                  if(y[0] === 'oauth_verifier') {
+                    verifier = y[1];
+                  }
+                }
+              } else if(y[0] === 'gotOAuth.html?oauth_token') {
+                got_oauth = y[1];
+              }
+              // step 3
+              oauth.setVerifier(verifier);
+              oauth.setAccessToken([got_oauth, localStorage.getItem("oauth_token_secret")]);
 
-    var client = new Evernote.Client({token: token, sandbox: false});
-    var noteStore = client.getNoteStore();
+              var getData = {'oauth_verifier':verifier};
+              ref.close();
+              oauth.request({'method': 'GET', 'url': app.evernoteHostName + '/oauth',
+                'success': app.success, 'failure': app.failure});
 
-    console.log(noteStore);
+            }
+          );
+        } else {
+          // Step 4 : Get the final token
+          var querystring = app.getQueryParams(data.text);
+          var authTokenEvernote = querystring.oauth_token;
+          // authTokenEvernote can now be used to send request to the Evernote Cloud API
 
-    var nBody = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
-    nBody += "<!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\">";
-    nBody += "<en-note>" + noteBody + "</en-note>";
+          // Here, we connect to the Evernote Cloud API and get a list of all of the
+          // notebooks in the authenticated user's account:
+          var noteStoreURL = querystring.edam_noteStoreUrl;
+          var noteStoreTransport = new Thrift.BinaryHttpTransport(noteStoreURL);
+          var noteStoreProtocol = new Thrift.BinaryProtocol(noteStoreTransport);
+          var noteStore = new NoteStoreClient(noteStoreProtocol);
+          noteStore.listNotebooks(authTokenEvernote, function (notebooks) {
+            console.log(notebooks);
+          }
+        },
+        function onerror(error) {
+          console.log(error);
+        });
 
-    // Create note object
-    var ourNote = new Evernote.Note();
-    ourNote.title = noteTitle;
-    ourNote.content = nBody;
-    ourNote.attributes = new Evernote.NoteAttributes();
-    if (isReminder) {
-      ourNote.attributes.reminderOrder = 0;
+      },
+      failure: function(error) {
+        console.log('error ' + error.text);
     }
-
-    // Attempt to create note in Evernote account
-    noteStore.createNote(ourNote, function(err, note) {
-      callback(err, note);
-    });
-  };
-
-
-
+  }
 
 });
 
