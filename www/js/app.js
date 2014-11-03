@@ -72,7 +72,7 @@ evernote.service('createEvernote', function($rootScope) {
         consumerKey: evernote.consumerKey,
         consumerSecret: evernote.consumerSecret,
         callbackUrl : "gotOAuth.html", // this filename doesn't matter in this example
-        signatureMethod : "HMAC-SHA1",
+        signatureMethod : "HMAC-SHA1"
       };
       oauth = OAuth(options);
       // OAuth Step 1: Get request token
