@@ -67,11 +67,11 @@ evernote.service('createEvernote', function($rootScope) {
     consumerKey: 'abdullahalger',
     consumerSecret: '6a2c6323f12f818c',
     evernoteHostName: 'https://sandbox.evernote.com',
-    showConfirm: function() {
+    loginEvernote: function() {
       options = {
         consumerKey: evernote.consumerKey,
         consumerSecret: evernote.consumerSecret,
-        callbackUrl : "gotOAuth.html", // this filename doesn't matter in this example
+        callbackUrl : "https://sandbox.evernote.com", // this filename doesn't matter in this example
         signatureMethod : "HMAC-SHA1"
       };
       oauth = OAuth(options);
